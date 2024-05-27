@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import {GoogleLogin} from 'react-google-login'
 // import loginImg from '../../assets/Images/LoginImg/stock-vector-e-learning-vector-flat-concept-design-with-student-sitting-behind-work-desk-student-in-learning-758900497.jpg'
 import log from '../../assets/Images/LoginImg/SingleImg.svg'
+import { Link } from 'react-router-dom'
 import { useState } from "react";
 
 const  Login = () => {
@@ -20,7 +21,7 @@ const onFailureSuccess = (res) => {
     <div>
          <div className="bg-white min-h-screen flex justify-center items-center ">
              
-            <div className="bg-white flex items-center rounded-2xl shadow-lg w-[800px] p-  ">
+            <div className="bg-white flex items-center rounded-2xl shadow-lg w-[800px]  ">
                 
                <div>
                  <img className='w-[380px] h-[500px]' src={log} alt="" />
@@ -31,12 +32,12 @@ const onFailureSuccess = (res) => {
 
                   <form action="" className='flex  flex-col gap-3'>
                     <div className="relative">
-                      <h1 className="absolute text-gray-400 font-bold">Email</h1>
+                      <h1 className="absolute text-gray-400 font-bold ">Email</h1>
                    <input 
-                    className="p-2 mt-8 rounded-xl border w-full"
+                    className="p-2 mt-8 rounded-xl border w-full outline-none"
                     type="text"
                     name='email' 
-                    placeholder='email' 
+                    placeholder='Email' 
                     
                     />
 
@@ -44,10 +45,10 @@ const onFailureSuccess = (res) => {
                     <div className='relative'>
                       <h2 className="absolute text-gray-400 font-bold ">Password</h2>
                      <input 
-                     className="p-2 mt-8 rounded-xl border  w-full "
+                     className="p-2 mt-8 rounded-xl border w-full  outline-none"
                      type="password"
                      name='password'
-                     placeholder='password'
+                     placeholder='Password'
 
                     />
                     <IoEyeOutline className="absolute top-1/2 right-3 transulate-y-1/2 text-gray-400 mt-2 "/>
@@ -77,9 +78,13 @@ const onFailureSuccess = (res) => {
                             )}
                         />
              <div className="flex justify-between items-center mt-3">
-                    <p className="text-xs"> if you Don't have an account.you can signup here!..</p>
+                    <p className="text-xs"> if you Don't have an account.you can register here!..</p>
 
+                    <Link to='/signup'>
+                    
                     <button className="bg-gray-200  px-5 border rounded-xl hover:scale-105 duration-300 text-violet-700">Register</button>
+                    </Link>
+
                    </div>
                   </div>   
 
