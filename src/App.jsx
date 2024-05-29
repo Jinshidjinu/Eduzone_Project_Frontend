@@ -3,6 +3,7 @@ import './App.css'
 import Login from '../src/Components/login/Login'
 import Signup from '../src/Components/Signup/Signup';
 import LandingPageNav from './Components/Navbar/LandingPageNav';
+import Landingpage from './Components/LandingPage/Landingpage';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 function App() {
  
@@ -14,7 +15,8 @@ function App() {
           <Route exact path='/' element={<Login/>}/>
           <Route exact path='/signup' element={<Signup/>}/>
           
-          <Route />
+          <Route exact path='/landing' element={<LandingPageNav/>}/>
+          <Route exact path='/landingPage' element={<Landingpage/>} />
     
 
         </Routes>

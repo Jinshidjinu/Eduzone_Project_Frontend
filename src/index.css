@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Freeman&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Freeman&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.transparent-bg {
+    background-color: rgba(146, 128, 217, 0.5); /* Adjust the RGBA values and alpha level as needed */
+  }

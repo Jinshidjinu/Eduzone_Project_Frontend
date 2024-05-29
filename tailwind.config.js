@@ -7,7 +7,12 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        "Freeman":"Freeman",
+        "font2":"Josefin"
+      }
+    },
   },
   plugins: [],
 }
