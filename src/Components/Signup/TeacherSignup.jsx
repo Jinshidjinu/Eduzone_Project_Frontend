@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import Img from '../../assets/Images/LoginImg/SingleImg.svg';
+import Img from '../../assets/Images/LoginImg/Learning.gif';
 import { IoEyeOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import axiosInstance from '../../config/axiosConfig';
 
-const Signup = () => {
+const TeacherSignup = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -41,10 +41,10 @@ const Signup = () => {
         <div className="bg-white min-h-screen flex justify-center items-center">
             <div className="bg-white w-[830px] md:max-w-1/2 h-auto flex flex-col md:flex-row items-center rounded-2xl shadow-lg mt-12">
                 <div className="sm:block hidden w-1/2 p-5">
-                    <img className='w-full h-auto' src={Img} alt="" />
+                    <img className='w-full h-auto' src={Img} alt="learning" />
                 </div>
                 <div className='bg-white md:w-1/2 rounded-2xl mb-10 p-4'>
-                    <h1 className='font-bold text-2xl text-center text-[#9280D9] mb-5 md:text-3xl'>Sign Up</h1>
+                    <h1 className='font-bold text-2xl text-center text-blue-500 mb-5 md:text-3xl'>Sign Up</h1>
                     <form className='flex flex-col' onSubmit={handleSubmit}>
                         <div className="relative">
                             <input
@@ -66,7 +66,7 @@ const Signup = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                     
+                    
                         <div className='relative'>
                             <input
                                 className='p-2 mt-8 rounded-md border w-full outline-none'
@@ -88,11 +88,11 @@ const Signup = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                    
-                        <Button variant="primary" content='Sign Up' size="md" className="mt-4" type="submit" onClick={handleSubmit} />
+                   
+                        <Button variant="primary" content='Sign Up' size="md" className="mt-4 bg-blue-500 hover:bg-gradient-to-r from-blue-500 to-blue-500 hover:bg-blue-500" type="submit" onClick={handleSubmit} />
                     </form>
                     <div className='flex flex-col md:flex-row gap-2 items-center mt-3'>
-                        <p className="text-xs md:text-sm mb-2 md:mb-0">Already a Member! <Link to='/' className="text-blue-600">Login Here!</Link></p>
+                        <p className="text-xs md:text-sm mb-2 md:mb-0">Already a Member! <Link to='/teacherlogin' className="text-blue-600">Login Here!</Link></p>
                     </div>
                 </div>
             </div>
@@ -100,4 +100,4 @@ const Signup = () => {
     )
 }
 
-export default Signup;
+export default TeacherSignup;

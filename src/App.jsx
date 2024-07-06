@@ -1,29 +1,34 @@
 import './App.css'
-// import Signup from './pages/StudentsSide/Signup';
-import Login from '../src/Components/login/Login'
-import Signup from '../src/Components/Signup/Signup';
-import LandingPageNav from './Components/Navbar/LandingPageNav';
-import Landingpage from './Components/LandingPage/Landingpage';
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
-function App() {
- 
+
+import { BrowserRouter } from 'react-router-dom';
+import axiosInstance from './config/axiosConfig';
+import { useEffect, useState } from 'react';
+import UserRouter from './Router/userRouter';
+
+const  App = () => {
+
+  const [message,setMessage] = useState('')
+
+    useEffect(() => {
+        axiosInstance.get('/hello')
+            .then(response => {
+                setMessage(response.data.message);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+       },[]);
+
+
   return (
+   <div>
     
       <BrowserRouter>
-        <Routes>
-          
-          <Route exact path='/' element={<Login/>}/>
-          <Route exact path='/signup' element={<Signup/>}/>
-          
-          <Route exact path='/landing' element={<LandingPageNav/>}/>
-          <Route exact path='/landingPage' element={<Landingpage/>} />
-    
-
-        </Routes>
+        <UserRouter/>
+          {/* <Route exact path='/hello' element={<Sample/>} /> */}
      </BrowserRouter>
+   </div>
    
-    
-  
   )
 }
 

@@ -8,3 +8,10 @@
 .transparent-bg {
     background-color: rgba(146, 128, 217, 0.5); /* Adjust the RGBA values and alpha level as needed */
   }
+
+  .gradient-text {
+    background: linear-gradient(115deg, #f9ce34, #ee2a7b, #6228d7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
