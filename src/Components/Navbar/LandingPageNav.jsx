@@ -50,8 +50,8 @@ const LandingPageNav = () => {
           <span className='z-10 relative'>Sign Up / Login</span>
         </button>
         {isPopup && (
-          <div className='absolute top-16 mt-2 text-gray-800 right-16 bg-white rounded-lg p-2 w-44 h-24 shadow-lg flex flex-col gap-3'>
-            <h1 className='text-gray-500 text-center'>Join for free</h1>
+          <div className='absolute top-16 mt-2 text-gray-800 right-12 bg-[rgb(244,239,250)] rounded-lg p-2 w-44 h-24 shadow-lg flex flex-col gap-3'>
+            <h1 className='text-gray-500 text-center'>Join for free!.</h1>
             <div className='flex items-center gap-2'>
               <button className='w-1/2 h-8 bg-[#9C4DF4] text-white'><Link to="/"> Students  </Link></button>
               <button className='w-1/2 h-8 bg-[#9C4DF4] text-white'><Link to="/teacherlogin"> Teacher  </Link></button>
@@ -81,7 +81,7 @@ const LandingPageNav = () => {
             </button>
             {isPopup && (
           <div className='absolute mt-12  text-gray-800  bg-violet-200  rounded-lg p-2 w-44 h-24 shadow-lg flex flex-col gap-3'>
-            <h1 className='text-gray-500 text-center'>Join for free</h1>
+            <h1 className='text-gray-500 text-center'>Join for free!</h1>
             <div className='flex items-center gap-2'>
              
               <button className='w-1/2 h-8 bg-[#9C4DF4] text-white text-sm'> <Link to="/"> Student  </Link></button>

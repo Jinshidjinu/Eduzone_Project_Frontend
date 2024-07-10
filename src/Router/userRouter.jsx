@@ -7,13 +7,15 @@ import TeacherSignup from '../Components/Signup/TeacherSignup'
 import Header from '../Components/Navbar/Header'
 import LandingPageNav from '../Components/Navbar/LandingPageNav'
 import StudentsHome from '../pages/User/StudensHome'
+import OtpVerify from '../pages/OtpVerify'
 const userRouter = () => {
+  
   return (
     <div>
         <Routes>
-            
             <Route exact path='/' element={<Login/>}></Route>
             <Route exact path='/signup' element={<Signup/>}></Route>
+            <Route exact path="/otpverify/:mailId" element={<OtpVerify />} />
             <Route exact path='/teacherlogin' element={<TeacherLogin/>}></Route>
             <Route exact path='/teachersignup' element={<TeacherSignup/>}></Route>
 

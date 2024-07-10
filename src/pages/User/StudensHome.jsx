@@ -1,4 +1,4 @@
-import React from 'react';
+
 import LandingBackgrnd from '../../assets/Images/Allimg/HomeBackground.png';
 import LandingPageNav from '../../Components/Navbar/LandingPageNav';
 import  Button from '../../Components/Button/Button'
@@ -32,7 +32,7 @@ const  StudentsHome = () => {
               Welcome to EDUZONE, your gateway to an innovative and enriching learning experience.
               At EDUZONE, we believe in empowering students with knowledge that transcends boundaries.
               Through our interactive online platform, we offer a diverse range of courses tailored to
-              your needs. Whether you're a high school student exploring new interests or a working professional,
+              your needs. Whether you&apos;re a high school student exploring new interests or a working professional,
               EDUZONE provides a supportive environment where you can thrive. Our team of dedicated
               educators fosters critical thinking and lifelong learning.
             </p>
@@ -152,7 +152,7 @@ const  StudentsHome = () => {
             <p className='text-[#9C4DF4] font-sans'>College Level</p>
           </div> 
           <div  className='text-3xl md:text-4xl  font-bold pb-2 flex flex-col gap-3 text-gray-700'>
-            <h1>Don't Waste time in </h1>
+            <h1>Don&apose;t Waste time in </h1>
             <h1>COVID-19 Pandemic.</h1>
             <h1>Develop your skills.</h1>
           </div>
@@ -200,7 +200,7 @@ const  StudentsHome = () => {
         <div className='bg-white w-full md:w-[900px] h-[400px] flex flex-col justify-center p-10 gap-7'>
         <div  className='text-3xl md:text-4xl font-bold pb-2 flex flex-col gap-3 text-gray-700'>
             <h1> DREAM TEAM </h1>
-            <h1>LEARN FROM INDIA'S BEST</h1>
+          <h1>LEARN FROM INDIA&apos;S BEST</h1>
         
           </div>
           <p className=' text-justify font-sans'>Eduzone is proud to bring India’s Best CA,ACCA,CMA teachers under one roof to provide our users the best possible learning experience and an unparalleled advantage to help them crack CA,ACCA,CMA and  finals. Get unlimited access to the Dream Team as a part of the Eduzone Learning family. </p>

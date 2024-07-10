@@ -69,7 +69,7 @@ const Login = () => {
                         )}
                     />
                     <div className="flex flex-col md:flex-row justify-between items-center mt-3">
-                        <p className="text-xs md:text-sm mb-2 md:mb-0">Don't have an account? <Link to='/signup' className="text-blue-600">Register here!</Link></p>
+                        <p className="text-xs md:text-sm mb-2 md:mb-0">Don&apose;t have an account? <Link to='/signup' className="text-blue-600">Register here!</Link></p>
                     
                     </div>
                 </div>
