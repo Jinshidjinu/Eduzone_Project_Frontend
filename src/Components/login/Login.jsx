@@ -3,10 +3,22 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleLogin } from 'react-google-login';
 import log from '../../assets/Images/LoginImg/SingleImg.svg';
 import { Link } from 'react-router-dom';
-
+import { useState } from "react";
+import axiosInstance from "../../config/axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+  
+    const [LoginData , setLoginData] = useState({
+        email:'',
+        password:'',
+
+    })
+    const [error, setError] = useState('');
+
+    const naviagate = useNavigate()
+
     const cliendId = '96836127407-kkfc754a6vbacon0kbomq2su9ajtvu4r.apps.googleusercontent.com';
 
     const onLoginSuccess = (response) => {
@@ -17,6 +29,53 @@ const Login = () => {
         console.log('login failed :', res);
     }
 
+
+    const handleChange = (e) =>{
+        const {name,value} = e.target;
+        setLoginData({
+            ...LoginData,
+            [name]  : value,
+        })
+    }
+
+
+    const handleSubmit =  async (e) =>{
+        e.preventDefault();
+        setError('')
+        try {
+
+            const response = await axiosInstance.post('/login', {LoginData})
+            console.log('Login success:', response.data)
+            if (response.status === 200 ) {
+                naviagate('/studentshome')
+            }else{
+                console.log('Signup Failed', response.data);
+            }
+        } catch (error) {
+            if (error.response) {
+                switch (error.response.status) {
+                  case 401:
+                    setError('Invalid email or password');
+                    break;
+                  case 403:
+                    setError('Please verify your email before logging in');
+                    break;
+                  case 500:
+                    setError('Internal server error');
+                    break;
+                  default:
+                    setError('Email and password are required');
+                }
+              } 
+            else{
+                console.log('Error:',error.message);
+            }
+            
+        }
+    }
+
+
+
     return (
         <div className="bg-white min-h-screen flex justify-center items-center ">
             <div className="bg-white flex flex-col md:flex-row items-center rounded-2xl shadow-lg max-w-3/4 p-5 md:p-10  mt-12">
@@ -25,15 +84,18 @@ const Login = () => {
                 </div>
                 <div className='md:w-1/2 p-2'>
                     <h2 className='font-bold text-2xl text-[#9280D9] mb-5 md:text-3xl '>Login</h2>
-                    <form className='flex flex-col gap-3'>
+                    { error && <p className="text-red-500 mb-3">{error}</p>}
+                    <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
                         <div className="relative">
                             <label htmlFor="email" className="absolute text-gray-400 font-bold">Email</label>
                             <input
                                 id="email"
                                 className="p-2 mt-8 rounded-xl border w-full outline-none"
-                                type="text"
+                                type="email"
                                 name='email'
+                                value={LoginData.email}
                                 placeholder='Email'
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='relative'>
@@ -44,6 +106,8 @@ const Login = () => {
                                 type="password"
                                 name='password'
                                 placeholder='Password'
+                                value={LoginData.password}
+                                onChange={handleChange}
                             />
                             <IoEyeOutline className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 mt-2" />
                         </div>

@@ -19,7 +19,9 @@ const Signup = () => {
    
 
     const [errors, setErrors] = useState({});
+    
     const navigate = useNavigate()
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({

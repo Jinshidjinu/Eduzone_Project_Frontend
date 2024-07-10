@@ -2,13 +2,16 @@
 import  { useState, useRef, useEffect } from 'react';
 import axiosInstance from '../config/axiosConfig';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const OtpVerify = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
 
-  const { mailId } = useParams();
-  console.log(mailId, "mail id");
+  const { email } = useParams();
+  console.log(email, "mail id");
+
+  const navigate = useNavigate();
 
   
   const inputRef = useRef(null);
@@ -38,8 +41,16 @@ const OtpVerify = () => {
     const otpString = otp.join('');
     console.log('Submitting OTP:', otpString);
     try {
-      const response = await axiosInstance.post('/verifyOtp',{mailId, otpString });
+      const response = await axiosInstance.post('/verifyOtp',{email, otpString });
       console.log('Server response', response.data);
+      if (response.status === 200) {
+        navigate('/')
+        
+      }else{
+
+        console.log('OTP verification failed', response.data);
+
+      }
     } catch (error) {
       console.log('Error verifying OTP', error);
     }

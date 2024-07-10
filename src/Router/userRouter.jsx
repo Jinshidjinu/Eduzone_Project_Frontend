@@ -15,7 +15,7 @@ const userRouter = () => {
         <Routes>
             <Route exact path='/' element={<Login/>}></Route>
             <Route exact path='/signup' element={<Signup/>}></Route>
-            <Route exact path="/otpverify/:mailId" element={<OtpVerify />} />
+            <Route exact path="/otpverify/:email" element={<OtpVerify />} />
             <Route exact path='/teacherlogin' element={<TeacherLogin/>}></Route>
             <Route exact path='/teachersignup' element={<TeacherSignup/>}></Route>
 
