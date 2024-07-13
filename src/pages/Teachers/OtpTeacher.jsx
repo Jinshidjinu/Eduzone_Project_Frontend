@@ -44,7 +44,7 @@ const OtpTeacher = () => {
       const response = await axiosInstance.post('/mentorsOtp',{email, otpString });
       console.log('Server response', response.data);
       if (response.status === 200) {
-        navigate('/')
+        navigate('/teacherlogin')
         
       }else{
 
