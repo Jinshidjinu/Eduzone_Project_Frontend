@@ -17,7 +17,9 @@ import Tutors from '../../assets/Images/LandingPage/Tutor.png'
 import { IoMdPlayCircle } from "react-icons/io";
 import Footer from '../../Components/Footer/Footer';
 
-const  StudentsHome = () => {
+
+  const  StudentsHome = () => {
+
   return (
     <div className="min-h-screen flex flex-col bg-[rgb(244,239,250)]">
       <LandingPageNav />

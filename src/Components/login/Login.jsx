@@ -78,6 +78,8 @@ const Login = () => {
 
     return (
         <div className="bg-white min-h-screen flex justify-center items-center ">
+     
+
             <div className="bg-white flex flex-col md:flex-row items-center rounded-2xl shadow-lg max-w-3/4 p-5 md:p-10  mt-12">
                 <div className="sm:block hidden w-1/2 p-5">
                     <img className='w-full h-auto' src={log} alt="" />
