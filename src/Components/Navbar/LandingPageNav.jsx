@@ -4,7 +4,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Link } from 'react-router-dom';
+
+
 const LandingPageNav = () => {
+  
   const [isPopup, setPopup] = useState(false);
   const [LandNav, setLandNav] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -54,7 +57,7 @@ const LandingPageNav = () => {
             <h1 className='text-gray-500 text-center'>Join for free!.</h1>
             <div className='flex items-center gap-2'>
               <button className='w-1/2 h-8 bg-[#9C4DF4] text-white'><Link to="/"> Students  </Link></button>
-              <button className='w-1/2 h-8 bg-[#9C4DF4] text-white'><Link to="/teacherlogin"> Teacher  </Link></button>
+              <button className='w-1/2 h-8 bg-[#9C4DF4] text-white'><Link to="/teachersignup"> Teacher  </Link></button>
             </div>
           </div>
         )}

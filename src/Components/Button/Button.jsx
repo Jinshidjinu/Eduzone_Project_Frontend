@@ -6,7 +6,7 @@ const Button = ({ children, onClick, className, content, variant = 'primary', si
   
   const variants = {
     primary: 'bg-[#9280D9] rounded-lg text-white py-2 hover:scale-105 hover:bg-gradient-to-r from-[#A54A99] to-[#490692] duration-300 mt-2',
-    secondary: 'bg-gray-500 text-white hover:bg-gray-600',
+    secondary: 'bg-purple-500   text-white w-[150px] h-[40px] py-2 flex justify-center items-center rounded-md hover:bg-purple-600 transition duration-300',
     outline: 'bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white',
   };
 
@@ -16,7 +16,7 @@ const Button = ({ children, onClick, className, content, variant = 'primary', si
     lg: 'text-lg px-6 py-3',        
   };
 
-  const variantClasses = variants[variant] || variants.primary;
+  const variantClasses = variants[variant] || variants.primary || variants.secondary;
   const sizeClasses = sizes[size] || sizes.md;
 
   return (
