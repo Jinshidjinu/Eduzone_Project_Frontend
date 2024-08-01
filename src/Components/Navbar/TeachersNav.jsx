@@ -12,8 +12,8 @@ const TeachersNav = () => {
   };
 
   return (
-    <nav className="bg-[rgb(244,239,250)]">
-      <div className="max-w-full min-h-[70px] md:mx-auto flex items-center justify-between px-4">
+    <nav className="bg-[rgb(244,239,250)]   ">
+      <div className=" max-w-full min-h-[70px]  md:mx-auto flex items-center justify-between px-4">
         <img className="w-[140px] md:w-[200px]" src={Logo} alt="Logo" />
 
         <div className="hidden md:flex items-center gap-10">

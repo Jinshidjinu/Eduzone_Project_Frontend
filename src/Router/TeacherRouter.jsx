@@ -18,5 +18,4 @@ const TeacherRouter = () => {
     </div>
   )
 }
-
 export default TeacherRouter

@@ -5,7 +5,7 @@ import Signup from '../Components/Signup/Signup'
 import Header from '../Components/Navbar/Header'
 import LandingPageNav from '../Components/Navbar/LandingPageNav'
 import StudentsHome from '../pages/User/StudensHome'
-import OtpVerify from '../pages/OtpVerify'
+import OtpVerify from '../pages/User/OtpVerify'
 import Spinner from '../Components/shared/Spinner'
 const userRouter = () => {
   
@@ -14,7 +14,7 @@ const userRouter = () => {
         <Routes>
             <Route exact path='/' element={<Login/>}></Route>
             <Route exact path='/signup' element={<Signup/>}></Route>
-            <Route exact path="/otpverify/:email" element={<OtpVerify />} />
+            <Route path="/otpverify/:email" element={<OtpVerify />} />
             <Route exact path='/spinner' element={<Spinner/>}></Route>    
             <Route exact path='/header' element={<Header/>}></Route>
             <Route exact path='/landing' element={<LandingPageNav/>}></Route>

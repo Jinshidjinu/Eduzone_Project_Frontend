@@ -12,11 +12,14 @@ const TeacherSignup = () => {
         email: '',
         password: '',
         confirmpassword: '',
+        phone: '',
+        qualification: '',
+        subject:'',
     
     });
 
     const navigate = useNavigate()
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,20 +32,14 @@ const TeacherSignup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post("/Mentorsignup", formData);
-            if (response.status === 201) {
+            const response = await axiosInstance.post("/Teachers/auth/TeacherSignup", formData);
+            if (response) {
                 console.log('Signup Successful');
-                navigate(`/mentorsOtp/${formData.email}`)
-            } else {
-                console.log('Signup Failed', response.data);
+                navigate(`/mentorsOtp/${response.data.email}`)
             }
         } catch (error) {
-           if (error.response) {
-            setErrors(error.response.data);
-            
-           }else{
-            console.log('Error:' , error.message);
-           }
+            console.log(error, "show");
+            setErrors(error.response.data.err || error.response.data.error);
         }
     };
 
@@ -55,10 +52,11 @@ const TeacherSignup = () => {
                 <div className='bg-white md:w-1/2 rounded-2xl mb-10 p-4'>
                     <h1 className='font-bold text-2xl text-center text-blue-500 mb-5 md:text-3xl'>Sign Up</h1>
                     <form className='flex flex-col' onSubmit={handleSubmit}>
-                    {errors.required && <p className='text-red-600 ml-2'>{errors.required}</p>}
+
+                     {errors ?(<p className='text-red-600 ml-2'>{errors}</p> ):"" }
                         <div className="relative">
                             <input
-                                className="p-2 mt-7 rounded-md border w-full outline-none"
+                                className="p-2 mt-5 rounded-md border w-full outline-none"
                                 type="text"
                                 name='name'
                                 placeholder='Name'
@@ -66,10 +64,9 @@ const TeacherSignup = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        {errors.name && <p className='text-red-600'>{errors.name}</p>}
                         <div className='relative'>
                             <input
-                                className='p-2 mt-8 rounded-md border w-full outline-none'
+                                className='p-2 mt-5 rounded-md border w-full outline-none'
                                 type="email"
                                 name='email'
                                 placeholder='Email'
@@ -77,10 +74,45 @@ const TeacherSignup = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        {errors.email && <p className='text-red-600'>{errors.email}</p>}
+                        <div className='relative '>
+                            <input
+                                className='p-2 mt-5 rounded-md border w-full outline-none'
+                                type="text"
+                                name='phone'
+                                placeholder='Phone'
+                                value={formData.phone}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className='relative '>
+                            <select
+                                className='p-2 mt-5 rounded-md border w-full outline-none'
+                                name='qualification'
+                                value={formData.qualification}
+                                onChange={handleChange}
+                            >
+                                <option value="" disabled selected>Select Qualification</option>
+                                <option value="CMA">CMA USA</option>
+                                <option value="bachelors and CMA">Bachelor&apos;s Degree and CMA USA</option>
+                                <option value="Masters and CMA">Master&apos;s Degree and CMA USA</option>
+                            </select>
+                        </div>
+                        <div className='relative '>
+                            <select
+                                className='p-2 mt-5 rounded-md border w-full outline-none'
+                                name='subject'
+                                value={formData.subject}
+                                onChange={handleChange}
+                            >
+                                <option value="" disabled selected >Choose Subject</option>
+                                <option value="CMA USA">CMA USA</option>
+                                <option value="ACCA">ACCA</option>
+                                <option value="CA">CA</option>
+                            </select>
+                        </div>
                         <div className='relative'>
                             <input
-                                className='p-2 mt-8 rounded-md border w-full outline-none'
+                                className='p-2 mt-5 rounded-md border w-full outline-none'
                                 type="password"
                                 name='password'
                                 placeholder='Password'
@@ -89,10 +121,9 @@ const TeacherSignup = () => {
                             />
                             <IoEyeOutline className='absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 mt-2' />
                         </div>
-                        {errors.password && <p className='text-red-600'>{errors.password}</p>}
                         <div className='relative'>
                             <input
-                                className='p-2 mt-8 rounded-md border w-full outline-none'
+                                className='p-2 mt-5 rounded-md border w-full outline-none'
                                 type="password"
                                 name='confirmpassword'
                                 placeholder='Confirm Password'
@@ -100,7 +131,7 @@ const TeacherSignup = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        {errors.confirmpassword && <p className='text-red-600'>{errors.confirmpassword}</p>}
+                    
                         <Button variant="primary" content='Sign Up' size="md" className="mt-4 bg-blue-500 hover:bg-gradient-to-r from-blue-500 to-blue-500 hover:bg-blue-500" type="submit" onClick={handleSubmit} />
                     </form>
                     <div className='flex flex-col md:flex-row gap-2 items-center mt-3'>

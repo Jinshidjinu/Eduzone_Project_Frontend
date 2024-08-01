@@ -10,10 +10,7 @@ const OtpTeacher = () => {
 
   const { email } = useParams();
   console.log(email, "mail id");
-
-  const navigate = useNavigate();
-
-  
+  // const navigate = useNavigate();
   const inputRef = useRef(null);
   useEffect(() => {
     if (inputRef.current) {
@@ -41,21 +38,15 @@ const OtpTeacher = () => {
     const otpString = otp.join('');
     console.log('Submitting OTP:', otpString);
     try {
-      const response = await axiosInstance.post('/mentorsOtp',{email, otpString });
+      const response = await axiosInstance.post('/Teachers/auth/OtpVerify',{email, otpString });
       console.log('Server response', response.data);
-      if (response.status === 200) {
-        navigate('/teacherlogin')
-        
-      }else{
-
-        console.log('OTP verification failed', response.data);
-
+      if (response) {
+        // navigate('/teacherlogin')
       }
     } catch (error) {
       console.log('Error verifying OTP', error);
     }
   };
-
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
@@ -67,7 +58,6 @@ const OtpTeacher = () => {
           We&apos;ve sent a code to your email. Please enter it below.
         </p>
       </div>
-
       <div className="mt-8 max-w-md w-full mx-auto">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form onSubmit={handleSubmit} className="space-y-6">

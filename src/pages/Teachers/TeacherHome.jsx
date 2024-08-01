@@ -1,9 +1,17 @@
 import TeachersNav from "../../Components/Navbar/TeachersNav"
-import Card from "../../Components/HomeCard/Card"
+import Card from "../../Components/shared/HomeCard/Card"
 import GroupStudy from '../../assets/Images/HomeCard/teaching.png'
 import instructorIMG from '../../assets/Images/TeacherHome/front-view-male-student-red-checkered-shirt.png'
+import instructor2 from '../../assets/Images/TeacherHome/young-blackhaired-man-demonstrating-something-bright-laptop 1.png'
+import pause from '../../assets/Images/TeacherHome/BG.png'
 import { useState } from "react"
+import { IoPlaySkipBackSharp } from "react-icons/io5";
+import { IoPlaySkipForward } from "react-icons/io5";
+import { TbPlayerPauseFilled } from "react-icons/tb";
 import Button from "../../Components/Button/Button"
+import Headings from "../../Components/shared/Headings/Headings"
+import frirnds from '../../assets/Images/HomeCard/teaching.png'
+import Footer from "../../Components/Footer/Footer"
 
 const TeacherHome = () => {
 
@@ -80,13 +88,34 @@ const TeacherHome = () => {
             ))
         }
       </ul>
-
     <Button variant="secondary" content="Apply Now" />
+      </div>
     </div>
-          </div>
+  </div>
+  
+     <div className="w-full h-[15vh] bg-[rgb(244,239,250)] ">
+      <Headings content="How to apply to Join as instructor "/>
+     </div>
+     <div className='bg-[rgb(244,239,250)] flex justify-center flex-col items-center  gap-4 p-4 md:p-8'>
+      <div className='bg-white w-full  md:w-[660px]  rounded-2xl flex flex-col items-center p-6'>
+        <div
+            className='bg-cover w-full md:w-[610px] h-[430px] bg-[#EBEAF4] rounded-t-xl  flex items-end justify-between   px-36 py-3 '
+            style={{ backgroundImage: `url(${instructor2}) ` }}
+          >   
+               <img src={frirnds} alt="" className='w-[110px]  h-[120px] rounded-lg' />
 
-        </div>
-         
+          </div>
+          
+          <div className="bg-cover w-full h-[40px] rounded-b-xl bg-slate-50 flex justify-center items-center gap-6" 
+          style={{ backgroundImage: `url(${pause})` }}
+          >
+             <IoPlaySkipBackSharp  className='text-white'/>
+             <TbPlayerPauseFilled  className='text-white'/>
+             <IoPlaySkipForward className='text-white '/>
+          </div>
+          </div>
+          </div>
+          <Footer/>
     </div>
   )
 }

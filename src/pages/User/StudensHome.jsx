@@ -13,13 +13,32 @@ import CA from '../../assets/Images/LandingPage/CA.jpeg'
 import Covid from '../../assets/Images/LandingPage/Covid-19.png'
 import CMAusa from'../../assets/Images/LandingPage/CMA USA.jpg'
 import Tutors from '../../assets/Images/LandingPage/Tutor.png'
-
+import {useEffect, useState} from 'react'
+import StudentAxiosPrivate from '../../Hooks/StudentAxiosPrivate';
 import { IoMdPlayCircle } from "react-icons/io";
 import Footer from '../../Components/Footer/Footer';
+import { useSelector } from 'react-redux';
+// import axiosInstance from '../../config/axiosConfig';
 
+const  StudentsHome = () => {     
+  const axiosPrivate = StudentAxiosPrivate()
+    const [student, setStudent] = useState({})
+    const { AuthstoreToken} = useSelector((state)=> state.general)
 
-  const  StudentsHome = () => {
-
+    const fetchUserDetails = async ()=>{
+      try {
+        const res = await axiosPrivate.get(`/students/auth/single`, {
+          headers:{ Authorization: `Bearer ${AuthstoreToken}`}
+        })
+        setStudent(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    useEffect(() => {
+    fetchUserDetails()
+    }, []);
+   console.log(student,'datas');
   return (
     <div className="min-h-screen flex flex-col bg-[rgb(244,239,250)]">
       <LandingPageNav />
@@ -42,7 +61,11 @@ import Footer from '../../Components/Footer/Footer';
             <hr className={`w-[80%] bg-gray-600 h-[8px] border-transparent  rounded-r-lg`} />
             </div>
           </div>
-          <button className="border border-[#9280D9] bg-[#9C4DF4]  hover:bg-gradient-to-r from-[#A54A99] to-[#490692] text-white font-bold w-[130px] h-[40px] ho hover:text-gray-200  duration-300 mt-5">
+          <button 
+          onClick={()=>{
+            fetchUserDetails()
+          }}
+          className="border border-[#9280D9] bg-[#9C4DF4]  hover:bg-gradient-to-r from-[#A54A99] to-[#490692] text-white font-bold w-[130px] h-[40px] ho hover:text-gray-200  duration-300 mt-5">
             Get Started
           </button>
         </div>

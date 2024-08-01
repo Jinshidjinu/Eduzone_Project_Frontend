@@ -1,6 +1,6 @@
 
 import  { useState, useRef, useEffect } from 'react';
-import axiosInstance from '../config/axiosConfig';
+import axiosInstance from '../../config/axiosConfig';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const OtpVerify = () => {
   console.log(email, "mail id");
 
   const navigate = useNavigate();
-
+  const [errors, setErrors] = useState('');
   
   const inputRef = useRef(null);
   useEffect(() => {
@@ -41,18 +41,14 @@ const OtpVerify = () => {
     const otpString = otp.join('');
     console.log('Submitting OTP:', otpString);
     try {
-      const response = await axiosInstance.post('/verifyOtp',{email, otpString });
+      const response = await axiosInstance.post('/students/auth/verifyOtp',{email, otpString });
       console.log('Server response', response.data);
-      if (response.status === 200) {
+      if (response) {
         navigate('/')
-        
-      }else{
-
-        console.log('OTP verification failed', response.data);
-
       }
     } catch (error) {
       console.log('Error verifying OTP', error);
+      setErrors(error.response.data.err || error.response.data.error );
     }
   };
 
@@ -67,8 +63,10 @@ const OtpVerify = () => {
           We&apos;ve sent a code to your email. Please enter it below.
         </p>
       </div>
-
       <div className="mt-8 max-w-md w-full mx-auto">
+      {errors ? (
+        <p className='text-red-600 text-md text-center mb-2'>{errors}</p>
+      ) : null}
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
