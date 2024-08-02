@@ -2,18 +2,16 @@ import { IoEyeOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 // import  {useDispatch} from 'react-redux'
 import { useState } from "react";
-import axios from "axios";
 import logo from '../../assets/Images/AdminImg/hacker-mid-pacific-ict-center-cyberfed-magnificent-seven-2.png'
-
+import axiosInstance from "../../config/axiosConfig";
 
 const Admin = () => {
     const [LoginData , setLoginData] = useState({
         email:'',
-        password:'',
-
+        password:''
     })
-    const [error, setError] = useState('');
-    const naviagate = useNavigate()
+    const [errors, setErrors] = useState('');
+    const navigate = useNavigate()
     const handleChange = (e) =>{
         const {name,value} = e.target;
         setLoginData({
@@ -21,42 +19,31 @@ const Admin = () => {
             [name]  : value,
         })
     }
-
-
-    const handleSubmit =  async (e) =>{
-        e.preventDefault();
-        setError('')
+    const handleSubmit = async (e) => {
         try {
-            const response = await axios.post('/students/auth/login', LoginData)
-            console.log('Login success:', response.data)
+            e.preventDefault();
+            const response = await axiosInstance.post('/admin/auth/Adminlogin', LoginData);
+            console.log('Login success:', response.data);
             if (response) {
-                naviagate('/studentshome')
-            }else{
-                console.log('Signup Failed', response.data);
+                navigate('/');
             }
         } catch (error) {
-            if (error.response) {
-                console.log(error.response);
-               } 
-            else{
-                console.log('Error:',error.message);
-            }
-        }
+            console.log(error, "show");
+            setErrors(error.response.data.err || error.response.data.error);
+          }
     }
-
-
-    return (
-        <div className="bg-white min-h-screen flex justify-center items-center ">
-     
-
+     return (
+          <div className="bg-white min-h-screen flex justify-center items-center ">
             <div className="bg-white flex flex-col md:flex-row items-center rounded-2xl shadow-lg max-w-3/4 p-5 md:p-10  mt-12">
                 <div className="sm:block hidden w-1/2 p-5">
                     <img className='w-[600px] h-auto' src={logo} alt="" />
                 </div>
                 <div className='md:w-1/2 p-2'>
                     <h2 className='font-bold text-2xl text-black mb-5 md:text-3xl '>Login</h2>
-                    { error && <p className="text-red-500 mb-3">{error}</p>}
                     <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
+                    {errors ? (
+                             <p className='text-red-600 text-sm mb-2'>{errors}</p>
+                        ): "" }
                         <div className="relative">
                             <label htmlFor="email" className="absolute text-gray-400 font-bold">Email</label>
                             <input

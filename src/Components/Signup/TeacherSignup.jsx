@@ -34,7 +34,6 @@ const TeacherSignup = () => {
         try {
             const response = await axiosInstance.post("/Teachers/auth/TeacherSignup", formData);
             if (response) {
-                console.log('Signup Successful');
                 navigate(`/mentorsOtp/${response.data.email}`)
             }
         } catch (error) {

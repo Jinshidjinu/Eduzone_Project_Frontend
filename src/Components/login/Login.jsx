@@ -8,28 +8,24 @@ import axiosInstance from "../../config/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import  {useDispatch} from 'react-redux'
 import { setStudentToken } from "../../Redux/Reducer/Reducer";
+
 const Login = () => {
-  
     const [LoginData , setLoginData] = useState({
         email:'',
         password:'',
 
     })
-    const [error, setError] = useState('');
+    const [errors, setErrors] = useState('');
 
     const naviagate = useNavigate()
     const dispatch  = useDispatch()
-
     const cliendId = '96836127407-kkfc754a6vbacon0kbomq2su9ajtvu4r.apps.googleusercontent.com';
-
     const onLoginSuccess = (response) => {
         console.log('Login success:', response.profileObj);
     }
-
     const onFailureSuccess = (res) => {
         console.log('login failed :', res);
     }
-
 
     const handleChange = (e) =>{
         const {name,value} = e.target;
@@ -42,39 +38,31 @@ const Login = () => {
 
     const handleSubmit =  async (e) =>{
         e.preventDefault();
-        setError('')
+        setErrors('')
         try {
             const response = await axiosInstance.post('/students/auth/login', LoginData)
-            console.log('Login success:', response.data)
             if (response) {
                 dispatch(setStudentToken(response?.data))
                 naviagate('/studentshome')
-            }else{
-                console.log('Signup Failed', response.data);
             }
         } catch (error) {
-            if (error.response) {
-                console.log(error.response);
-               } 
-            else{
-                console.log('Error:',error.message);
-            }
+            setErrors(error.response.data.err || error.response.data.error);
         }
     }
 
 
     return (
         <div className="bg-white min-h-screen flex justify-center items-center ">
-     
-
             <div className="bg-white flex flex-col md:flex-row items-center rounded-2xl shadow-lg max-w-3/4 p-5 md:p-10  mt-12">
                 <div className="sm:block hidden w-1/2 p-5">
                     <img className='w-full h-auto' src={log} alt="" />
                 </div>
                 <div className='md:w-1/2 p-2'>
                     <h2 className='font-bold text-2xl text-[#9280D9] mb-5 md:text-3xl '>Login</h2>
-                    { error && <p className="text-red-500 mb-3">{error}</p>}
                     <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
+                    {errors ? (
+                             <p className='text-red-600 text-sm mb-2'>{errors}</p>
+                        ): "" }
                         <div className="relative">
                             <label htmlFor="email" className="absolute text-gray-400 font-bold">Email</label>
                             <input

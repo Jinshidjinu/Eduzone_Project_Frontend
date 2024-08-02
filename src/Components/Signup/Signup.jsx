@@ -68,9 +68,8 @@ const Signup = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                             />
-             
                         </div>
-
+                        
                         <div className='relative mb-4'>
                             <input
                                 className='p-2 rounded-md border w-full outline-none'
