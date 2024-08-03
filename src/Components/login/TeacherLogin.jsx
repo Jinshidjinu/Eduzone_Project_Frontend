@@ -29,7 +29,6 @@ const TecherLogin = () => {
         console.log('login failed :', res);
     }
 
-
     const handleChange = (e) =>{
         const {name,value} = e.target;
         setLoginData({
@@ -38,12 +37,10 @@ const TecherLogin = () => {
         })
     }
 
-
     const handleSubmit =  async (e) =>{
         e.preventDefault();
         setError('')
         try {
-
             const response = await axiosInstance.post('/Mentorslogin', {LoginData})
             console.log('Login success:', response.data)
             if (response.status === 200 ) {

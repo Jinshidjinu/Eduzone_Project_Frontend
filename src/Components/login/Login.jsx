@@ -26,7 +26,6 @@ const Login = () => {
     const onFailureSuccess = (res) => {
         console.log('login failed :', res);
     }
-
     const handleChange = (e) =>{
         const {name,value} = e.target;
         setLoginData({
@@ -34,8 +33,7 @@ const Login = () => {
             [name]  : value,
         })
     }
-
-
+     
     const handleSubmit =  async (e) =>{
         e.preventDefault();
         setErrors('')
@@ -49,7 +47,6 @@ const Login = () => {
             setErrors(error.response.data.err || error.response.data.error);
         }
     }
-
 
     return (
         <div className="bg-white min-h-screen flex justify-center items-center ">
