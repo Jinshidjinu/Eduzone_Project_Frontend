@@ -2,7 +2,8 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useState } from "react";
 import DashMenu from "../../../Components/Dashboard/DashMenu"
 import DashNav from "../../../Components/Dashboard/DashNav";
-const UsersLists = () => {
+import UsersList from "../../../Components/Dashboard/UersList";
+const Userlist = () => {
     const [hide,setHide] = useState(false)
     return (
       <div className='h-[100%]  flex bg-[#2c2cea88]'>
@@ -14,9 +15,10 @@ const UsersLists = () => {
           </div>
           <div className={`h-[100%] pb-[30px] ${hide === true ? 'w-[95%]':'lg:w-[85%] w-[100%]'}`}>
             <DashNav/>
+            <UsersList/>
           </div>
       </div>
     )
 }
 
-export default UsersLists
+export default Userlist

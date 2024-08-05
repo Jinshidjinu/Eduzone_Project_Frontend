@@ -3,6 +3,7 @@ import Logo from '../../assets/Images/LoginImg/Landing Logo.png';
 import { useState } from "react";
 import Dash from '../../assets/Images/DashImg/briefcase.png'
 import users from '../../assets/Images/DashImg/user.png'
+import { Link } from "react-router-dom";
 const DashMenu = ({value}) => {
     const [active,setActive] = useState(1)
 
@@ -22,14 +23,19 @@ const DashMenu = ({value}) => {
           </div>
           <div className='flex gap-[8px] flex-col relative '>
               <div>
+             
                 <button onClick={()=>setActive(1)} className={`flex h-[50px]  items-center  font-medium  ${value=== true ?'w-[50px] rounded-full items-center justify-center':'w-[190px] gap-[15px] pl-[17px] rounded-[25px]'} ${active === 1 ? 'bg-[#2c2cea89] text-white' : '' }`}>
                    <img src={Dash} alt="" className={`w-[20px] h-[20px] ${active ===1 ? 'hidden' : 'flex'}`}/>
-                   <h1 className={value === true ? 'hidden' :'flex'}>Dashboard</h1>
+                   <h1 className={value === true ? 'hidden' :'flex'}> <Link to="/dashboard">Dashboard </Link></h1>
                   </button>
+            
+
+                  <Link to="/userslist">
                 <button onClick={()=>setActive(2)} className={`flex h-[50px]  items-center  font-medium ${value=== true ?'w-[50px] rounded-full items-center justify-center':'w-[190px] gap-[15px] pl-[17px] rounded-[25px]'} ${active === 2 ? 'bg-[#2c2cea89] text-white' : '' }`}>
                    <img src={users} alt="" className={`w-[20px] h-[20px] ${active === 2 ? 'hidden' : 'flex'}`}/>
                    <h1 className={value === true ? 'hidden' :'flex'}>Users</h1>
                   </button>
+                  </Link>
                 <button onClick={()=>setActive(3)} className={`flex h-[50px] items-center font-medium ${value=== true ?'w-[50px] rounded-full items-center justify-center':'w-[190px] gap-[15px] pl-[17px] rounded-[25px]'} ${active === 3 ? 'bg-[#2c2cea89] text-white' : '' }`}>
                    {/* <img src={Tasks} alt="" className={`w-[20px] h-[20px] ${active === 3? 'hidden' : 'flex'}`}/> */}
                    <h1 className={value === true ? 'hidden' :'flex'}> <a href="/tasks">Tasks</a></h1>

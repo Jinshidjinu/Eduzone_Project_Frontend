@@ -132,6 +132,8 @@ const Signup = () => {
                             </select>
  
                         </div>
+                        
+
                         <div className='relative '>
                             <select
                                 className='p-2 mt-5 rounded-md border w-full outline-none'
