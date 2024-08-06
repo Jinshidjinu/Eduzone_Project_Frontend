@@ -17,7 +17,7 @@ const Button = ({ children, onClick, className, content, variant = 'primary', si
     lg: 'text-lg px-6 py-3',        
   };
 
-  const variantClasses = variants[variant] || variants.primary || variants.secondary;
+  const variantClasses = variants[variant] || variants.primary || variants.secondary || variants.addButtons
   const sizeClasses = sizes[size] || sizes.md;
 
   return (

@@ -1,63 +1,135 @@
-import  { useState } from 'react';
-import Button from "../../Components/Button/Button"
+import { useState } from 'react';
+import Button from '../Button/Button';
+import axiosInstance from '../../config/axiosConfig';
+
+
 const AddSubVideo = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [videoFile, setVideoFile] = useState(null);
+    const [formData, setFormData] = useState({
+        title: '',
+        description: '',
+        videoFile: null
+    });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission (e.g., API call to upload video)
-    console.log('Submitting:', { title, description, videoFile });
-  };
+    const { title, description, videoFile } = formData;
+    const [videoPreview, setVideoPreview] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState('');
+    
+    const handleChange = (e) => {
+        const { id, value, files } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [id]: files ? files[0] : value
+        }));
 
-  return (
-    <div className="container mx-auto  h-[100vh] px-4 py-8 flex items-center flex-col  ">
-      <h1 className="text-2xl font-bold mb-6 text-gray-700">Add New Video</h1>
-      <form onSubmit={handleSubmit} className="max-w-lg">
-        <div className="mb-4">
-          <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
-            Title
-          </label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
+        if (id === "videoFile" && files.length > 0) {
+            const file = files[0];
+            const fileUrl = URL.createObjectURL(file);
+            setVideoPreview(fileUrl);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!title || !description || !videoFile) {
+            alert('Please fill in all fields and select a video file.');
+            return;
+        }
+
+        const data = new FormData();
+        data.append('title', title);
+        data.append('description', description);
+        data.append('video', videoFile);
+
+        try {
+            setIsLoading(true);
+            const response = await axiosInstance.post('/admin/auth/addvideos', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            if (response) {
+                console.log('Success:', response.data);
+                // Reset form
+                setFormData({
+                    title: '',
+                    description: '',
+                    videoFile: null
+                });
+                setVideoPreview(null);
+            }
+        }  catch (error) {
+            console.log(error, "show");
+            setErrors(error.response.data.err || error.response.data.error);
+          }
+    };
+
+    return (
+        <div className="container mx-auto h-[100vh] px-4 py-8 flex items-center flex-col">
+            <h1 className="text-2xl font-bold mb-6 text-gray-700">Add New Video</h1>
+            <form onSubmit={handleSubmit} className="max-w-lg">
+            {errors ? (
+                             <p className='text-red-600 text-sm mb-2'>{errors}</p>
+                        ): "" }
+                <div className="mb-4">
+                    <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
+                        Title
+                    </label>
+                    <input
+                        type="text"
+                        id="title"
+                        value={title}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
+                        Description
+                    </label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        rows="4"
+                        required
+                    ></textarea>
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="videoFile" className="block text-gray-700 font-bold mb-2">
+                        Choose Video File
+                    </label>
+                    <input
+                        type="file"
+                        id="videoFile"
+                        accept="video/*"
+                        onChange={handleChange}
+                        className="w-full px-3 py-2  border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    />
+                </div>
+
+                {videoPreview && (
+                    <div className="mb-4">
+                        <h2 className="text-gray-700 font-bold mb-2">Video Preview</h2>
+                        <video
+                            src={videoPreview}
+                            controls
+                            className="w-[400px] h-[200px] border border-gray-300 rounded-md"
+                        />
+                    </div>
+                )}
+                <Button 
+                    content={isLoading ? "Uploading..." : "Upload Video"} 
+                    variant="addButtons" 
+                    disabled={isLoading}
+                />
+            </form>
         </div>
-        <div className="mb-4">
-          <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
-            Description
-          </label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-3  border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
-            required
-          ></textarea>
-        </div>
-        <div className="mb-4">
-          <label htmlFor="videoFile" className="block text-gray-700 font-bold mb-2">
-            Choose Video File
-          </label>
-          <input
-            type="file"
-            id="videoFile"
-            accept="video/*"
-            onChange={(e) => setVideoFile(e.target.files[0])}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-        <Button content="Upload Video" variant="addButtons" />
-      </form>
-    </div>
-  );
+    );
 };
 
-export default AddSubVideo
+export default AddSubVideo;
