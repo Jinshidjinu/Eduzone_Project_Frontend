@@ -1,6 +1,6 @@
 import axiosInstance from "../../config/axiosConfig"
 import { useEffect, useState } from "react"
-import { IoToggleSharp } from "react-icons/io5";
+
 const UsersList = () => {
   const [users, setUsers] = useState([]);
 
@@ -17,21 +17,27 @@ const StudentDatas =async () =>{
    }
 }
 StudentDatas()
-}, []);
+}, [])
 
  const handleBlockandUnblock = async (id) =>{
-  console.log(id,'jinu');
-  
   try {
     const response = await axiosInstance.post(`/admin/auth/studentsBlock/${id}`)
     setUsers(users.map(user => 
       user._id === id ? {...user,status:response.data.student.status}:user
     ));
-
   } catch (error) {
     console.error('Error updating user status:', error);
   }
  }
+
+  const handleDelete = async (id) =>{
+            try {
+              const response = await axiosInstance.post(`/admin/auth/studentDelete/${id}`)
+              console.log(response); 
+            } catch (error) {
+              console.error('Error updating user status:', error);
+            }  
+  }
 
   return (
         <div className='flex-1 p-5 flex  items-start'>
@@ -73,7 +79,7 @@ StudentDatas()
                   </div>
                 </td>
                 <td className='px-4 py-2 text-center'>
-                  <button className='bg-red-800 w-[50px] rounded-md text-white'>Delete</button>
+                  <button className='bg-red-800 w-[50px] rounded-md text-white' onClick={()=> handleDelete(user._id)}>Delete</button>
                 </td>
               </tr>
             ))}
