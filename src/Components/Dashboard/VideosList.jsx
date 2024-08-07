@@ -21,6 +21,16 @@ const VideosList = () => {
 
     },[])
 
+    const handleDelete = async (id) => {
+        console.log(id, 'id');
+    
+        try {
+            const response = await axiosInstance.post(`/admin/auth/videoDelete/${id}`);
+            console.log(response.data, 'deleted');
+        } catch (error) {
+            console.error('Delete Error status:', error);
+        }
+    }
 
   return (
     <div className='flex-1 p-5 flex  items-start'>
@@ -45,7 +55,7 @@ const VideosList = () => {
           <td className='px-4 py-2 text-center'>{details.videoPath}</td>
           <td className='px-4 py-2 text-center'><MdMovieEdit className="text-3xl text-green-700"/></td>
           <td className='px-4 py-2 text-center'>
-             <TiDelete className="text-3xl text-red-600"/>
+             <TiDelete className="text-3xl text-red-600" onClick={()=> handleDelete(details._id)}/>
           </td>
         </tr>
           ))}
