@@ -1,9 +1,13 @@
+import DashNav from "../../../Components/Dashboard/DashNav"
+import DashMenu from "../../../Components/Dashboard/DashMenu"
+import VideosList from "../../../Components/Dashboard/VideosList"
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useState } from "react";
-import DashMenu from "../../../Components/Dashboard/DashMenu"
-import DashNav from "../../../Components/Dashboard/DashNav";
-import UsersList from "../../../Components/Dashboard/UersList";
-const Userlist = () => {
+
+
+
+
+const VideoListPage = () => {
     const [hide,setHide] = useState(false)
     return (
       <div className='h-[100%]  flex bg-[#2c2cea88]'>
@@ -15,10 +19,10 @@ const Userlist = () => {
           </div>
           <div className={`h-[100%] pb-[30px] ${hide === true ? 'w-[95%]':'lg:w-[85%] w-[100%]'}`}>
             <DashNav/>
-            <UsersList/>
+            <VideosList/>
           </div>
       </div>  
     )
 }
 
-export default Userlist
+export default VideoListPage
