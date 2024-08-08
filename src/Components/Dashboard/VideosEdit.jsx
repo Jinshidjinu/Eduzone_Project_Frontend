@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import Button from '../Button/Button';
-import axiosInstance from '../../config/axiosConfig';
+import { useEffect, useState } from "react"
+import axiosInstance from "../../config/axiosConfig"
+import Button from "../Button/Button"
+import { useParams } from "react-router-dom";
 
 
-const AddSubVideo = () => {
+
+const VideosEdit = () => {
+    const {id} = useParams()
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -15,6 +18,30 @@ const AddSubVideo = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState('');
     
+
+   useEffect(()=>{
+    const fetchVideodata = async () =>{
+        try {
+            const response = await axiosInstance.get(`/admin/auth/getVideo/${id}`)
+            const { title, description, videoPath } = response.data;
+            
+            
+            setFormData({
+                title,
+                description,
+                videoFile: null // Keep videoFile null since we don't have the actual file
+            });
+            setVideoPreview(videoPath); // Assuming videoPath is the URL for the video file
+            
+        } catch (error) {
+            console.error('Error fetching video data:', error);
+                setErrors('Failed to load video data.');
+        }
+    }
+    fetchVideodata();
+   },[id])
+  
+
     const handleChange = (e) => {
         const { id, value, files } = e.target;
         setFormData((prevData) => ({
@@ -44,7 +71,7 @@ const AddSubVideo = () => {
 
         try {
             setIsLoading(true);
-            const response = await axiosInstance.post('/admin/auth/addvideos', data, {
+            const response = await axiosInstance.post(`/admin/auth/editvideos/${id}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -67,7 +94,7 @@ const AddSubVideo = () => {
 
     return (
         <div className="container mx-auto h-[100vh] px-4 py-8 flex items-center flex-col">
-            <h1 className="text-2xl font-bold mb-6 text-gray-700">Add New Video</h1>
+            <h1 className="text-2xl font-bold mb-6 text-gray-700">Edit Video</h1>
             <form onSubmit={handleSubmit} className="max-w-lg">
             {errors ? (
                              <p className='text-red-600 text-sm mb-2'>{errors}</p>
@@ -132,4 +159,4 @@ const AddSubVideo = () => {
     );
 };
 
-export default AddSubVideo;
+export default VideosEdit

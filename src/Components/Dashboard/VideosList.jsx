@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axiosInstance from "../../config/axiosConfig"
 import { MdMovieEdit } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 
 const VideosList = () => {
@@ -21,9 +22,8 @@ const VideosList = () => {
 
     },[])
 
-    const handleDelete = async (id) => {
-        console.log(id, 'id');
-    
+
+    const handleDelete = async (id) => {    
         try {
             const response = await axiosInstance.post(`/admin/auth/videoDelete/${id}`);
             console.log(response.data, 'deleted');
@@ -53,7 +53,7 @@ const VideosList = () => {
           <td className='px-4 py-2 text-center'>{details.title}</td>
           <td className='px-4 py-2 text-center'>{details.description}</td>
           <td className='px-4 py-2 text-center'>{details.videoPath}</td>
-          <td className='px-4 py-2 text-center'><MdMovieEdit className="text-3xl text-green-700"/></td>
+          <td className='px-4 py-2 text-center'><Link to={`/editvideos/${details._id}`}><MdMovieEdit className="text-3xl text-green-700"/></Link></td>
           <td className='px-4 py-2 text-center'>
              <TiDelete className="text-3xl text-red-600" onClick={()=> handleDelete(details._id)}/>
           </td>

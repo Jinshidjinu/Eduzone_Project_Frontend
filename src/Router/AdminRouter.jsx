@@ -4,6 +4,7 @@ import Dashboard from '../pages/Admin/Dashboard/Dashboard'
 import Userlist from '../pages/Admin/Dashboard/Userlist'
 import Addvideo from '../pages/Admin/Dashboard/Addvideo'
 import VideoListPage from '../pages/Admin/Dashboard/VideoListPage'
+import EditVideos from '../pages/Admin/Dashboard/EditVideos'
 const AdminRouter = () => {
   return (
     <div>
@@ -13,6 +14,7 @@ const AdminRouter = () => {
             <Route exact path='/userslist' element={<Userlist/>}></Route>
             <Route exact path='/addvideos' element={<Addvideo/>}></Route>
             <Route exact path='/videolist' element={<VideoListPage/>}></Route>
+            <Route exact path='/editvideos/:id' element={<EditVideos/>}></Route>
 
         </Routes>
     </div>
